@@ -1,0 +1,21 @@
+{
+  "key.categories.twitchchat": "Twitch Chat Widget",
+  "key.twitchchat.config": "Open Twitch chat settings",
+  "twitchchat.config.title": "Twitch Chat Widget",
+  "twitchchat.config.channel": "Twitch channel",
+  "twitchchat.config.channel.hint": "Channel name or twitch.tv link, Enter to connect",
+  "twitchchat.config.enabled": "Widget: %s",
+  "twitchchat.config.header": "Header: %s",
+  "twitchchat.config.textScale": "Text size: %s",
+  "twitchchat.config.opacity": "Background: %s",
+  "twitchchat.config.reset": "Reset position",
+  "twitchchat.config.drag": "Drag the box to move it, drag its corner to resize",
+  "twitchchat.status.disabled": "Widget disabled",
+  "twitchchat.status.nochannel": "No channel set",
+  "twitchchat.status.connecting": "Connecting...",
+  "twitchchat.status.joining": "Joining #%s...",
+  "twitchchat.status.connected": "Connected to #%s",
+  "twitchchat.status.reconnecting": "Connection lost, retrying...",
+  "twitchchat.widget.waiting": "Waiting for messages...",
+  "twitchchat.widget.nochannel": "No channel set - press %s"
+}

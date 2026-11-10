@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="twitchchat"
+version="${file.jarVersion}"
+displayName="Twitch Chat Widget"
+description='''
+Shows the live chat of a Twitch channel in a movable, resizable HUD widget.
+Everything is configured in game (default key: K).
+'''
+
+[[dependencies.twitchchat]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.twitchchat]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="CLIENT"
