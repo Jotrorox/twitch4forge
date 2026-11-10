@@ -1,14 +1,19 @@
 modLoader="javafml"
 loaderVersion="[40,)"
 license="BSD-2-Clause"
+issueTrackerURL="https://github.com/Jotrorox/twitch4forge/issues"
 
 [[mods]]
 modId="twitch4forge"
 version="${file.jarVersion}"
 displayName="twitch4forge"
+authors="Jotrorox"
+displayURL="https://github.com/Jotrorox/twitch4forge"
 description='''
 Shows the live chat of a Twitch channel in a movable, resizable HUD widget.
 Everything is configured in game (default key: K).
+
+Not affiliated with or endorsed by Twitch.
 '''
 
 [[dependencies.twitch4forge]]

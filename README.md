@@ -11,7 +11,6 @@ Twitch account or OAuth token.
 | Minecraft | 1.18.2 |
 | Forge | 40 or newer (built against 40.3.0) |
 | Side | Client only |
-| Mod version | 1.1.0 |
 
 ## Features
 
@@ -27,7 +26,8 @@ Twitch account or OAuth token.
 ## Installation
 
 1. Install [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.18.2.html) for Minecraft 1.18.2.
-2. [Build the jar](#building) and put `twitch4forge-1.1.0.jar` in your `mods` folder.
+2. Download the jar from the [latest release](https://github.com/Jotrorox/twitch4forge/releases/latest)
+   (or [build it](#building)) and put it in your `mods` folder.
 
 The mod is client-side only, so servers don't need it.
 
@@ -57,7 +57,8 @@ newer, point `JAVA_HOME` at a JDK 17 first.
 ./gradlew build
 ```
 
-The jar is written to `build/libs/twitch4forge-1.1.0.jar`.
+The jar is written to `build/libs/twitch4forge-<version>.jar`. The version is
+set by `mod_version` in `gradle.properties`.
 
 To start a development client with the mod loaded:
 
@@ -65,6 +66,22 @@ To start a development client with the mod loaded:
 ./gradlew runClient
 ```
 
+## Releasing
+
+1. Set `mod_version` in `gradle.properties` and add a section for it to
+   [CHANGELOG.md](CHANGELOG.md).
+2. Commit, then tag the commit `v<version>` and push the tag.
+
+The release workflow builds the jar and publishes a GitHub release with that
+changelog section as its notes.
+
 ## License
 
 [BSD 2-Clause](LICENSE)
+
+## Disclaimer
+
+twitch4forge is an unofficial, fan-made mod. It is not affiliated with,
+endorsed by or sponsored by Twitch Interactive, Inc., Mojang or Microsoft.
+Twitch is a trademark of Twitch Interactive, Inc. Minecraft is a trademark of
+Mojang Synergies AB.
