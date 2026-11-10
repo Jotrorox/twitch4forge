@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[40,)"
-license="All Rights Reserved"
+license="BSD-2-Clause"
 
 [[mods]]
 modId="twitchchat"
