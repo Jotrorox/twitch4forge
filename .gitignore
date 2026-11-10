@@ -1,11 +1,9 @@
+# Gradle / ForgeGradle
+.gradle/
+build/
+run/
+
 # OS / editor
 .DS_Store
 .idea/
 .vscode/
-
-# Exported packs
-*.zip
-*.mrpack
-
-# Local test instances
-run/
