@@ -1,4 +1,4 @@
-# Twitch Chat Widget
+# twitch4forge
 
 A client-side Minecraft Forge mod that shows a Twitch channel's live chat as a
 HUD overlay in game, so you can read chat without alt-tabbing.
@@ -27,7 +27,7 @@ Twitch account or OAuth token.
 ## Installation
 
 1. Install [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.18.2.html) for Minecraft 1.18.2.
-2. [Build the jar](#building) and put `twitchchat-1.1.0.jar` in your `mods` folder.
+2. [Build the jar](#building) and put `twitch4forge-1.1.0.jar` in your `mods` folder.
 
 The mod is client-side only, so servers don't need it.
 
@@ -46,17 +46,18 @@ The settings screen has three tabs:
 | **Messages** | Fade delay, hide when quiet, history while chat is open, timestamps, notices, hide `!commands` |
 
 A second key binding, unbound by default, shows and hides the widget.
-Settings are saved to `config/twitchchat.json`.
+Settings are saved to `config/twitch4forge.json`.
 
 ## Building
 
-You need JDK 17.
+You need JDK 17, and Gradle itself has to run on it. If your default Java is
+newer, point `JAVA_HOME` at a JDK 17 first.
 
 ```sh
 ./gradlew build
 ```
 
-The jar is written to `build/libs/twitchchat-1.1.0.jar`.
+The jar is written to `build/libs/twitch4forge-1.1.0.jar`.
 
 To start a development client with the mod loaded:
 

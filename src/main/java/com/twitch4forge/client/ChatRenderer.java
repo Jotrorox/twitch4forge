@@ -1,9 +1,9 @@
-package com.twicht4forge.twitchchat.client;
+package com.twitch4forge.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.twicht4forge.twitchchat.irc.ChatMessage;
-import com.twicht4forge.twitchchat.irc.TwitchIrcClient;
+import com.twitch4forge.irc.ChatMessage;
+import com.twitch4forge.irc.TwitchIrcClient;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.network.chat.Component;
@@ -89,10 +89,10 @@ public final class ChatRenderer {
         Component hint = null;
         if (lines.isEmpty() && !preview) {
             if (TwitchChat.connectedChannel().isEmpty()) {
-                hint = new TranslatableComponent("twitchchat.widget.nochannel", ClientInit.OPEN_CONFIG.getTranslatedKeyMessage());
+                hint = new TranslatableComponent("twitch4forge.widget.nochannel", ClientInit.OPEN_CONFIG.getTranslatedKeyMessage());
             } else if (!cfg.hideWhenEmpty) {
                 hint = TwitchChat.state() == TwitchIrcClient.State.CONNECTED
-                        ? new TranslatableComponent("twitchchat.widget.waiting") : TwitchChat.status();
+                        ? new TranslatableComponent("twitch4forge.widget.waiting") : TwitchChat.status();
             }
         }
 

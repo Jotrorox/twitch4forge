@@ -1,4 +1,4 @@
-package com.twicht4forge.twitchchat.client;
+package com.twitch4forge.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.AbstractSliderButton;
@@ -55,7 +55,7 @@ public final class ConfigScreen extends Screen {
     private double grabY;
 
     public ConfigScreen(@Nullable Screen parent) {
-        super(new TranslatableComponent("twitchchat.config.title"));
+        super(new TranslatableComponent("twitch4forge.config.title"));
         this.parent = parent;
     }
 
@@ -103,7 +103,7 @@ public final class ConfigScreen extends Screen {
         switch (tab) {
             case GENERAL -> {
                 channelBox = new EditBox(font, left + 1, rowY(1) + 1, full - 66, 18,
-                        new TranslatableComponent("twitchchat.config.channel"));
+                        new TranslatableComponent("twitch4forge.config.channel"));
                 channelBox.setMaxLength(80);
                 channelBox.setValue(typedChannel);
                 channelBox.setResponder(value -> {
@@ -115,58 +115,58 @@ public final class ConfigScreen extends Screen {
                     setInitialFocus(channelBox);
                 }
                 tip(addRenderableWidget(new Button(left + full - 60, rowY(1), 60, 20,
-                        new TranslatableComponent("twitchchat.config.connect"), button -> connect())),
-                        "twitchchat.config.connect");
-                toggle(left, rowY(2), full, "twitchchat.config.enabled", () -> cfg.enabled, value -> {
+                        new TranslatableComponent("twitch4forge.config.connect"), button -> connect())),
+                        "twitch4forge.config.connect");
+                toggle(left, rowY(2), full, "twitch4forge.config.enabled", () -> cfg.enabled, value -> {
                     cfg.enabled = value;
                     TwitchChat.apply();
                 });
-                action(left, rowY(3), half, "twitchchat.config.reset", cfg::resetLayout);
-                action(right, rowY(3), half, "twitchchat.config.resetAll", cfg::resetAll);
+                action(left, rowY(3), half, "twitch4forge.config.reset", cfg::resetLayout);
+                action(right, rowY(3), half, "twitch4forge.config.resetAll", cfg::resetAll);
             }
             case LOOK -> {
                 boolean minimal = cfg.style == ChatConfig.Style.MINIMAL;
                 boolean panel = cfg.style == ChatConfig.Style.PANEL;
-                cycle(left, rowY(0), full, "twitchchat.config.style", cfg.style, ChatConfig.Style.values(),
+                cycle(left, rowY(0), full, "twitch4forge.config.style", cfg.style, ChatConfig.Style.values(),
                         value -> cfg.style = value);
                 // Without a background there is nothing for a theme to colour.
-                cycle(left, rowY(1), full, "twitchchat.config.theme", cfg.theme, ChatConfig.Theme.values(),
+                cycle(left, rowY(1), full, "twitch4forge.config.theme", cfg.theme, ChatConfig.Theme.values(),
                         value -> cfg.theme = value).active = !minimal;
-                slider(left, rowY(2), half, "twitchchat.config.textScale",
+                slider(left, rowY(2), half, "twitch4forge.config.textScale",
                         ChatConfig.MIN_TEXT_SCALE, ChatConfig.MAX_TEXT_SCALE, cfg.textScale,
                         value -> cfg.textScale = Math.round(value * 20) / 20.0,
                         value -> Math.round(value * 20) * 5 + "%");
-                slider(right, rowY(2), half, "twitchchat.config.spacing",
+                slider(right, rowY(2), half, "twitch4forge.config.spacing",
                         0, ChatConfig.MAX_SPACING, cfg.messageSpacing,
                         value -> cfg.messageSpacing = (int) Math.round(value),
                         value -> Math.round(value) + "px");
-                slider(left, rowY(3), full, "twitchchat.config.opacity",
+                slider(left, rowY(3), full, "twitch4forge.config.opacity",
                         0, 1, cfg.backgroundOpacity,
                         value -> cfg.backgroundOpacity = value,
                         value -> Math.round(value * 100) + "%").active = !minimal;
-                toggle(left, rowY(4), half, "twitchchat.config.header", () -> cfg.showHeader,
+                toggle(left, rowY(4), half, "twitch4forge.config.header", () -> cfg.showHeader,
                         value -> cfg.showHeader = value).active = panel;
                 // Dark text on a light background only gets blurry with a shadow.
-                toggle(right, rowY(4), half, "twitchchat.config.shadow", () -> cfg.textShadow,
+                toggle(right, rowY(4), half, "twitch4forge.config.shadow", () -> cfg.textShadow,
                         value -> cfg.textShadow = value).active = minimal || !cfg.theme.light;
-                toggle(left, rowY(5), full, "twitchchat.config.nameColors", () -> cfg.coloredNames,
+                toggle(left, rowY(5), full, "twitch4forge.config.nameColors", () -> cfg.coloredNames,
                         value -> cfg.coloredNames = value);
             }
             case MESSAGES -> {
-                slider(left, rowY(0), full, "twitchchat.config.lifetime",
+                slider(left, rowY(0), full, "twitch4forge.config.lifetime",
                         0, ChatConfig.MAX_LIFETIME, cfg.messageLifetime,
                         value -> cfg.messageLifetime = (int) Math.round(value / 5) * 5,
-                        value -> Math.round(value / 5) == 0 ? I18n.get("twitchchat.config.lifetime.never")
-                                : I18n.get("twitchchat.config.lifetime.seconds", Math.round(value / 5) * 5));
-                toggle(left, rowY(1), full, "twitchchat.config.hideWhenEmpty", () -> cfg.hideWhenEmpty,
+                        value -> Math.round(value / 5) == 0 ? I18n.get("twitch4forge.config.lifetime.never")
+                                : I18n.get("twitch4forge.config.lifetime.seconds", Math.round(value / 5) * 5));
+                toggle(left, rowY(1), full, "twitch4forge.config.hideWhenEmpty", () -> cfg.hideWhenEmpty,
                         value -> cfg.hideWhenEmpty = value);
-                toggle(left, rowY(2), full, "twitchchat.config.showAllInChat", () -> cfg.showAllInChat,
+                toggle(left, rowY(2), full, "twitch4forge.config.showAllInChat", () -> cfg.showAllInChat,
                         value -> cfg.showAllInChat = value);
-                toggle(left, rowY(3), half, "twitchchat.config.timestamps", () -> cfg.showTimestamps,
+                toggle(left, rowY(3), half, "twitch4forge.config.timestamps", () -> cfg.showTimestamps,
                         value -> cfg.showTimestamps = value);
-                toggle(right, rowY(3), half, "twitchchat.config.notices", () -> cfg.showNotices,
+                toggle(right, rowY(3), half, "twitch4forge.config.notices", () -> cfg.showNotices,
                         value -> cfg.showNotices = value);
-                toggle(left, rowY(4), full, "twitchchat.config.hideCommands", () -> cfg.hideCommands,
+                toggle(left, rowY(4), full, "twitch4forge.config.hideCommands", () -> cfg.hideCommands,
                         value -> cfg.hideCommands = value);
             }
         }
@@ -249,10 +249,10 @@ public final class ConfigScreen extends Screen {
         fill(poseStack, left + MARGIN, top + 38, left + PANEL_WIDTH - MARGIN, top + 39, 0xFF2E2E38);
 
         if (tab == Tab.GENERAL) {
-            drawString(poseStack, font, new TranslatableComponent("twitchchat.config.channel"),
+            drawString(poseStack, font, new TranslatableComponent("twitch4forge.config.channel"),
                     left + MARGIN, rowY(0) + 10, 0xA0A0A0);
             int y = rowY(4) + 4;
-            for (FormattedCharSequence line : font.split(new TranslatableComponent("twitchchat.config.drag",
+            for (FormattedCharSequence line : font.split(new TranslatableComponent("twitch4forge.config.drag",
                     ClientInit.OPEN_CONFIG.getTranslatedKeyMessage()), inner)) {
                 font.draw(poseStack, line, left + MARGIN, y, 0xA0A0A0);
                 y += 10;
@@ -264,7 +264,7 @@ public final class ConfigScreen extends Screen {
         if (channelBox != null) {
             if (channelBox.getValue().isEmpty() && !channelBox.isFocused()) {
                 drawString(poseStack, font, font.plainSubstrByWidth(
-                        I18n.get("twitchchat.config.channel.hint"), channelBox.getWidth() - 8),
+                        I18n.get("twitch4forge.config.channel.hint"), channelBox.getWidth() - 8),
                         channelBox.x + 4, channelBox.y + 5, 0x707070);
             }
             boolean invalid = !channelBox.getValue().trim().isEmpty() && cfg.channel.isEmpty();
@@ -379,7 +379,7 @@ public final class ConfigScreen extends Screen {
         private final Tab target;
 
         TabButton(int x, int y, int width, Tab target) {
-            super(x, y, width, 16, new TranslatableComponent("twitchchat.config.tab." + target.name().toLowerCase(Locale.ROOT)),
+            super(x, y, width, 16, new TranslatableComponent("twitch4forge.config.tab." + target.name().toLowerCase(Locale.ROOT)),
                     button -> {
                         tab = target;
                         rebuild();

@@ -1,4 +1,4 @@
-package com.twicht4forge.twitchchat.irc;
+package com.twitch4forge.irc;
 
 import javax.net.ssl.SSLParameters;
 import javax.net.ssl.SSLSocket;

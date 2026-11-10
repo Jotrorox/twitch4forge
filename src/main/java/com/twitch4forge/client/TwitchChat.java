@@ -1,7 +1,7 @@
-package com.twicht4forge.twitchchat.client;
+package com.twitch4forge.client;
 
-import com.twicht4forge.twitchchat.irc.ChatLog;
-import com.twicht4forge.twitchchat.irc.TwitchIrcClient;
+import com.twitch4forge.irc.ChatLog;
+import com.twitch4forge.irc.TwitchIrcClient;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 
@@ -59,16 +59,16 @@ public final class TwitchChat {
     public static synchronized Component status() {
         ChatConfig cfg = config();
         if (!cfg.enabled) {
-            return new TranslatableComponent("twitchchat.status.disabled");
+            return new TranslatableComponent("twitch4forge.status.disabled");
         }
         if (client == null) {
-            return new TranslatableComponent("twitchchat.status.nochannel");
+            return new TranslatableComponent("twitch4forge.status.nochannel");
         }
         return switch (client.state()) {
-            case CONNECTING -> new TranslatableComponent("twitchchat.status.connecting");
-            case JOINING -> new TranslatableComponent("twitchchat.status.joining", client.channel());
-            case CONNECTED -> new TranslatableComponent("twitchchat.status.connected", client.channel());
-            case RECONNECTING -> new TranslatableComponent("twitchchat.status.reconnecting");
+            case CONNECTING -> new TranslatableComponent("twitch4forge.status.connecting");
+            case JOINING -> new TranslatableComponent("twitch4forge.status.joining", client.channel());
+            case CONNECTED -> new TranslatableComponent("twitch4forge.status.connected", client.channel());
+            case RECONNECTING -> new TranslatableComponent("twitch4forge.status.reconnecting");
         };
     }
 }

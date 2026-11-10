@@ -3,22 +3,22 @@ loaderVersion="[40,)"
 license="BSD-2-Clause"
 
 [[mods]]
-modId="twitchchat"
+modId="twitch4forge"
 version="${file.jarVersion}"
-displayName="Twitch Chat Widget"
+displayName="twitch4forge"
 description='''
 Shows the live chat of a Twitch channel in a movable, resizable HUD widget.
 Everything is configured in game (default key: K).
 '''
 
-[[dependencies.twitchchat]]
+[[dependencies.twitch4forge]]
     modId="forge"
     mandatory=true
     versionRange="[40,)"
     ordering="NONE"
     side="CLIENT"
 
-[[dependencies.twitchchat]]
+[[dependencies.twitch4forge]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.18.2,1.19)"

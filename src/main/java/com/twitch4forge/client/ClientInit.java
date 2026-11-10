@@ -1,4 +1,4 @@
-package com.twicht4forge.twitchchat.client;
+package com.twitch4forge.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -18,12 +18,12 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
 public final class ClientInit {
-    public static final Logger LOGGER = LogManager.getLogger("twitchchat");
-    public static final KeyMapping OPEN_CONFIG = new KeyMapping("key.twitchchat.config",
-            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, "key.categories.twitchchat");
+    public static final Logger LOGGER = LogManager.getLogger("twitch4forge");
+    public static final KeyMapping OPEN_CONFIG = new KeyMapping("key.twitch4forge.config",
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, "key.categories.twitch4forge");
     /** Unbound by default so it cannot clash with another mod. */
-    public static final KeyMapping TOGGLE = new KeyMapping("key.twitchchat.toggle",
-            InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), "key.categories.twitchchat");
+    public static final KeyMapping TOGGLE = new KeyMapping("key.twitch4forge.toggle",
+            InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), "key.categories.twitch4forge");
 
     private ClientInit() {
     }
@@ -68,7 +68,7 @@ public final class ClientInit {
             cfg.enabled = !cfg.enabled;
             cfg.save();
             TwitchChat.apply();
-            mc.gui.setOverlayMessage(new TranslatableComponent(cfg.enabled ? "twitchchat.toggle.on" : "twitchchat.toggle.off"), false);
+            mc.gui.setOverlayMessage(new TranslatableComponent(cfg.enabled ? "twitch4forge.toggle.on" : "twitch4forge.toggle.off"), false);
         }
     }
 }

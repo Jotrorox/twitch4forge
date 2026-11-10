@@ -1,4 +1,4 @@
-package com.twicht4forge.twitchchat.client;
+package com.twitch4forge.client;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
 
-/** Widget settings, stored in config/twitchchat.json and edited through {@link ConfigScreen}. */
+/** Widget settings, stored in config/twitch4forge.json and edited through {@link ConfigScreen}. */
 public final class ChatConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static final int MIN_WIDTH = 80;
@@ -83,7 +83,7 @@ public final class ChatConfig {
     public boolean hideCommands = false;
 
     private static Path file() {
-        return FMLPaths.CONFIGDIR.get().resolve("twitchchat.json");
+        return FMLPaths.CONFIGDIR.get().resolve("twitch4forge.json");
     }
 
     public static ChatConfig load() {
