@@ -1,5 +1,5 @@
 hash-format = "sha256"
 
 [[files]]
-file = "mods/twitchchat-1.0.0.jar"
-hash = "ed7d63caeebe923e5404a186a6044452f2ffa42f5377ec13f1a76601e2f1c89e"
+file = "mods/twitchchat-1.1.0.jar"
+hash = "1d1ee0ee6a36713fb17fd9fdc38b7f690bacf88e08d56a403d7caee5fb1011e4"

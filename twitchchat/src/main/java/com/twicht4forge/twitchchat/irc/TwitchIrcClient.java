@@ -178,7 +178,7 @@ public final class TwitchIrcClient {
             action = true;
         }
         return new ChatMessage(irc.tags.getOrDefault("id", ""), login, clean(author),
-                color(irc.tags.get("color"), login), clean(text), action, false);
+                color(irc.tags.get("color"), login), clean(text), action, false, System.currentTimeMillis());
     }
 
     private static int color(String tag, String login) {
@@ -189,16 +189,7 @@ public final class TwitchIrcClient {
             } catch (NumberFormatException ignored) {
             }
         }
-        // Blend dark colours (pure blue is a Twitch default) towards white so names stay readable.
-        int r = rgb >> 16 & 0xFF, g = rgb >> 8 & 0xFF, b = rgb & 0xFF;
-        double luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-        if (luminance < 100) {
-            double mix = (100 - luminance) / (255 - luminance);
-            r += (int) ((255 - r) * mix);
-            g += (int) ((255 - g) * mix);
-            b += (int) ((255 - b) * mix);
-        }
-        return r << 16 | g << 8 | b;
+        return rgb;
     }
 
     /** Drops control characters and Minecraft's formatting marker so chat cannot restyle the HUD. */

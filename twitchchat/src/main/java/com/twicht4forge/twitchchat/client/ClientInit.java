@@ -3,6 +3,8 @@ package com.twicht4forge.twitchchat.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.client.gui.OverlayRegistry;
@@ -19,6 +21,9 @@ public final class ClientInit {
     public static final Logger LOGGER = LogManager.getLogger("twitchchat");
     public static final KeyMapping OPEN_CONFIG = new KeyMapping("key.twitchchat.config",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, "key.categories.twitchchat");
+    /** Unbound by default so it cannot clash with another mod. */
+    public static final KeyMapping TOGGLE = new KeyMapping("key.twitchchat.toggle",
+            InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), "key.categories.twitchchat");
 
     private ClientInit() {
     }
@@ -33,15 +38,17 @@ public final class ClientInit {
 
     private static void onClientSetup(FMLClientSetupEvent event) {
         ClientRegistry.registerKeyBinding(OPEN_CONFIG);
+        ClientRegistry.registerKeyBinding(TOGGLE);
         OverlayRegistry.registerOverlayTop("Twitch Chat", (gui, poseStack, partialTick, width, height) -> {
             Minecraft mc = Minecraft.getInstance();
             ChatConfig cfg = TwitchChat.config();
             // The settings screen draws its own copy so it can be dragged around.
-            if (!cfg.enabled || mc.options.hideGui || mc.screen instanceof ConfigScreen) {
+            if (!cfg.enabled || mc.options.hideGui || mc.options.renderDebug || mc.screen instanceof ConfigScreen) {
                 return;
             }
             int[] r = cfg.rect(width, height);
-            ChatRenderer.INSTANCE.render(poseStack, mc.font, r[0], r[1], r[2], r[3], cfg, false);
+            boolean showAll = cfg.showAllInChat && mc.screen instanceof ChatScreen;
+            ChatRenderer.INSTANCE.render(poseStack, mc.font, r[0], r[1], r[2], r[3], cfg, false, showAll);
         });
         TwitchChat.apply();
     }
@@ -55,6 +62,13 @@ public final class ClientInit {
             if (mc.screen == null) {
                 mc.setScreen(new ConfigScreen(null));
             }
+        }
+        while (TOGGLE.consumeClick()) {
+            ChatConfig cfg = TwitchChat.config();
+            cfg.enabled = !cfg.enabled;
+            cfg.save();
+            TwitchChat.apply();
+            mc.gui.setOverlayMessage(new TranslatableComponent(cfg.enabled ? "twitchchat.toggle.on" : "twitchchat.toggle.off"), false);
         }
     }
 }

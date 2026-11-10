@@ -29,11 +29,22 @@ packwiz curseforge export   # CurseForge zip
 channel's live chat in a HUD widget. The built jar is in `mods/`.
 
 In game, press **K** (rebindable under Controls) or use the Config button in the
-Mods list. Type a channel name, drag the box to move it, and drag its corner to
-resize it. Settings are saved to `config/twitchchat.json`.
+Mods list. Type a channel name, drag the outlined box to move the chat, and drag
+its corner to resize it. The settings panel has three tabs:
+
+- **General** - channel, on/off, reset.
+- **Look** - style (*Panel*, *Lines* like vanilla chat, or *Minimal* with only
+  the messages), theme (*Dark*, *Light*, *Twitch*), text size, spacing,
+  background opacity, header, text shadow, name colours.
+- **Messages** - how long messages stay before fading (15 s by default, or
+  never), hiding the widget while chat is quiet, showing the history while the
+  Minecraft chat is open, timestamps, notices, hiding `!commands`.
+
+Hover any option for an explanation. A second key, unbound by default, shows and
+hides the widget. Settings are saved to `config/twitchchat.json`.
 
 ```sh
 # rebuild (needs JDK 17 to run Gradle)
 cd twitchchat && ./gradlew build
-cp build/libs/twitchchat-1.0.0.jar ../mods/   # then: packwiz refresh
+cp build/libs/twitchchat-1.1.0.jar ../mods/   # then: packwiz refresh
 ```

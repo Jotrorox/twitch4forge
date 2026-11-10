@@ -18,6 +18,39 @@ public final class ChatConfig {
     public static final int MIN_HEIGHT = 40;
     public static final double MIN_TEXT_SCALE = 0.5;
     public static final double MAX_TEXT_SCALE = 2.0;
+    public static final int MAX_LIFETIME = 120;
+    public static final int MAX_SPACING = 6;
+
+    /** How much chrome is drawn around the messages. */
+    public enum Style {
+        /** One box behind everything, with an optional header. */
+        PANEL,
+        /** A strip behind each message only, like vanilla chat. */
+        LINES,
+        /** Nothing but the text. */
+        MINIMAL
+    }
+
+    public enum Theme {
+        DARK(0x000000, 0x000000, 0xFFFFFF, 0xAAAAAA, false),
+        LIGHT(0xFFFFFF, 0xD8D8E0, 0x18181B, 0x60606C, true),
+        TWITCH(0x18181B, 0x772CE8, 0xEFEFF1, 0xADADB8, false);
+
+        public final int background;
+        public final int header;
+        public final int text;
+        /** Timestamps, notices and hints. */
+        public final int muted;
+        public final boolean light;
+
+        Theme(int background, int header, int text, int muted, boolean light) {
+            this.background = background;
+            this.header = header;
+            this.text = text;
+            this.muted = muted;
+            this.light = light;
+        }
+    }
 
     public boolean enabled = true;
     public String channel = "";
@@ -26,9 +59,28 @@ public final class ChatConfig {
     public double y = 0.2;
     public double width = 0.3;
     public double height = 0.45;
+
+    public Style style = Style.PANEL;
+    public Theme theme = Theme.DARK;
     public double textScale = 1.0;
     public double backgroundOpacity = 0.5;
     public boolean showHeader = true;
+    public boolean textShadow = true;
+    public boolean coloredNames = true;
+    /** Extra pixels between two messages. */
+    public int messageSpacing = 1;
+
+    /** Seconds a message stays visible, 0 keeps messages forever. */
+    public int messageLifetime = 15;
+    /** Hide the whole widget while no message is visible. */
+    public boolean hideWhenEmpty = true;
+    /** Bring faded messages back while the vanilla chat is open. */
+    public boolean showAllInChat = true;
+    public boolean showTimestamps = false;
+    /** Subs, raids and other notices from Twitch. */
+    public boolean showNotices = true;
+    /** Drop messages starting with "!", which are usually bot commands. */
+    public boolean hideCommands = false;
 
     private static Path file() {
         return FMLPaths.CONFIGDIR.get().resolve("twitchchat.json");
@@ -68,14 +120,43 @@ public final class ChatConfig {
         height = defaults.height;
     }
 
+    /** Restores every default except the channel and whether the widget is on. */
+    public void resetAll() {
+        ChatConfig defaults = new ChatConfig();
+        resetLayout();
+        style = defaults.style;
+        theme = defaults.theme;
+        textScale = defaults.textScale;
+        backgroundOpacity = defaults.backgroundOpacity;
+        showHeader = defaults.showHeader;
+        textShadow = defaults.textShadow;
+        coloredNames = defaults.coloredNames;
+        messageSpacing = defaults.messageSpacing;
+        messageLifetime = defaults.messageLifetime;
+        hideWhenEmpty = defaults.hideWhenEmpty;
+        showAllInChat = defaults.showAllInChat;
+        showTimestamps = defaults.showTimestamps;
+        showNotices = defaults.showNotices;
+        hideCommands = defaults.hideCommands;
+    }
+
     private void sanitize() {
         channel = normalizeChannel(channel);
         x = clamp(x, 0, 1);
         y = clamp(y, 0, 1);
         width = clamp(width, 0.05, 1);
         height = clamp(height, 0.05, 1);
+        // Gson leaves enums it does not recognise as null.
+        if (style == null) {
+            style = Style.PANEL;
+        }
+        if (theme == null) {
+            theme = Theme.DARK;
+        }
         textScale = clamp(textScale, MIN_TEXT_SCALE, MAX_TEXT_SCALE);
         backgroundOpacity = clamp(backgroundOpacity, 0, 1);
+        messageSpacing = (int) clamp(messageSpacing, 0, MAX_SPACING);
+        messageLifetime = (int) clamp(messageLifetime, 0, MAX_LIFETIME);
     }
 
     /** Widget rectangle in GUI pixels as {x, y, width, height}, always fully on screen. */

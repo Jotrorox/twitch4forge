@@ -48,6 +48,14 @@ public final class TwitchChat {
         return client == null ? null : client.state();
     }
 
+    /** Opaque colour of the connection dot: green when live, amber while connecting, grey when off. */
+    public static synchronized int stateColor() {
+        if (client == null) {
+            return 0xFF808080;
+        }
+        return client.state() == TwitchIrcClient.State.CONNECTED ? 0xFF40D040 : 0xFFE0B020;
+    }
+
     public static synchronized Component status() {
         ChatConfig cfg = config();
         if (!cfg.enabled) {
